@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Doctors</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+  /* Existing styles... */
+  /* Reset and base styles */
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background-color: #0077b6;
+      color: #fff;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .logo a:hover {
+      color: #e6e6e6;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #f1c40f;
+    }
+
+    /* Main Content */
+    main {
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      animation: fadeIn 1s ease;
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #0077b6;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0077b6;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 1rem;
+      }
+    } 
+    /* Doctor Section */
+    .doctors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .doctor {
+      background-color: #f5f5f5;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .doctor:hover {
+      transform: translateY(-5px);
+    }
+
+    .doctor img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .doctor h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #0077b6;
+    }
+
+    .doctor p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .doctors {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html">Healthcity Hospital</a>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Hospital</a>
+      <a href="service.html">Services</a>
+      <a href="appointment.html">Appointments</a>
+      <a href="emergency.html">Emergency</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Our Doctors</h1>
+    <section class="doctors">
+      <div class="doctor">
+        <img src="https://img.freepik.com/premium-photo/medical-concept-indian-beautiful-female-doctor-white-coat-with-stethoscope-waist-up-medical-student-woman-hospital-worker-looking-camera-smiling-studio-blue-background_185696-621.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1718582400&semt=sph" alt="Doctor 1">
+        <h3>Dr. Emily Brown</h3>
+        <p>M.D., Cardiology</p>
+        <p>Specialist in Cardiac Care</p>
+        <p>Experience: 15 years</p>
+        <hr>
+      </div>
+
+      <div class="doctor">
+        <img src="https://img.freepik.com/premium-photo/young-confident-indian-male-doctor_601128-4728.jpg?w=740" alt="Doctor 2">
+        <h3>Dr. Michael Johnson</h3>
+        <p>M.D., Pediatrics</p>
+        <p>Specialist in Child Care</p>
+        <p>Experience: 10 years</p>
+        <hr>
+      </div>
+
+      <div class="doctor">
+        <img src="https://img.freepik.com/free-photo/happy-doctor-white-background_1368-5809.jpg?t=st=1718684037~exp=1718687637~hmac=d2618524ca766f3bf5b3e0981741eba97b4c0d23443f5589d6a88a3fdc590485&w=740" alt="Doctor 3">
+        <h3>Dr. David Anderson</h3>
+        <p>M.D., Orthopedics</p>
+        <p>Specialist in Bone and Joint Care</p>
+        <p>Experience: 12 years</p>
+        <hr>
+      </div>
+
+      <div class="doctor">
+        <img src="https://img.freepik.com/free-photo/portrait-doctor_144627-39388.jpg?w=360&t=st=1718683974~exp=1718684574~hmac=1c896258383f4bf73581a68e575482d135dcc994d0124c3a4314dd0290772aeb" alt="Doctor 4">
+        <h3>Dr. Sarah Thompson</h3>
+        <p>M.D., Dermatology</p>
+        <p>Specialist in Skin Care</p>
+        <p>Experience: 8 years</p>
+        <hr>
+      </div>
+
+      <div class="doctor">
+        <img src="https://img.freepik.com/premium-photo/portrait-happy-successful-hindu-doctor-young-medical-practitioner-smiling-looking_321831-17342.jpg?size=626&ext=jpg&uid=R122819832&ga=GA1.1.1977701698.1718683894&semt=sph" alt="Doctor 5">
+        <h3>Dr. John Doe</h3>
+        <p>M.D., Neurology</p>
+        <p>Specialist in Brain and Nerve Care</p>
+        <p>Experience: 11 years</p>
+        <hr>
+      </div>
+
+      <div class="doctor">
+        <img src="https://img.freepik.com/premium-photo/medical-concept-indian-beautiful-female-doctor-white-coat-with-stethoscope-waist-up-medical-student-woman-hospital-worker-looking-camera-smiling-studio-blue-background_185696-621.jpg?size=626&ext=jpg&uid=R122819832&ga=GA1.1.1977701698.1718683894&semt=sph" alt="Doctor 6">
+        <h3>Dr. Jessica Taylor</h3>
+        <p>M.D., Obstetrics and Gynecology</p>
+        <p>Specialist in Women's Health</p>
+        <p>Experience: 11 years</p>
+        <hr>
+      </div>
+
+      <div class="doctor">
+        <img src="https://img.freepik.com/premium-photo/portrait-beautiful-young-female-doctor-white-medical-jacket-isolated-white-background-brunette-woman-medic-crossed-hands-smiling-camera_967785-92214.jpg?size=626&ext=jpg&uid=R122819832&ga=GA1.1.1977701698.1718683894&semt=sph" alt="Doctor 7">
+        <h3>Dr. Emily Davis</h3>
+        <p>M.D., Ophthalmology</p>
+        <p>Specialist in Eye Care</p>
+        <p>Experience: 9 years</p>
+        <hr>
+      </div>
+
+      <div class="doctor">
+        <img src="https://img.freepik.com/free-photo/world-doctors-day-cute-blonde-young-doctor-with-stethoscope-medical-gown_140725-162335.jpg?size=626&ext=jpg" alt="Doctor 8">
+        <h3>Dr. Jane Smith</h3>
+        <p>M.D., General Surgery</p>
+        <p>Specialist in Surgical Procedures</p>
+        <p>Experience: 13 years</p>
+        <hr>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>  Healthcity Hospital</p>
+  </footer>
+</body>
+</html>

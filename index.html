@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            background-color: #0077b6;
+            color: #fff;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .logo a:hover {
+            color: #e6e6e6;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f1c40f;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-links ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.6) 50%, rgba(240, 147, 251, 0.4) 100%);
+            animation: overlayShift 6s ease-in-out infinite;
+        }
+
+        @keyframes overlayShift {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.9; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+            animation: contentFloat 2s ease-out;
+        }
+
+        @keyframes contentFloat {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        @keyframes titleGlow {
+            from { 
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+                transform: scale(1);
+            }
+            to { 
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
+                transform: scale(1.02);
+            }
+        }
+
+        .hero-content p {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 30px;
+            color: #f0f0f0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+            animation: textSlide 1.5s ease-out 0.5s both;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        @keyframes textSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            display: inline-block;
+            animation: buttonPulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            }
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #764ba2, #f093fb, #f5576c);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .about {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .about h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .about p {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .services {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            animation: cardSlide 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+        .card:nth-child(4) { animation-delay: 0.8s; }
+        .card:nth-child(5) { animation-delay: 1.0s; }
+        .card:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes cardSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card i {
+            font-size: 50px;
+            color: #667eea;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: #764ba2;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        footer p {
+            position: relative;
+            z-index: 1;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links ul {
+                position: static;
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px 0;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px 20px;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero-content {
+                padding: 0 15px;
+            }
+
+            .service-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: clamp(2.5rem, 6vw, 3rem);
+            }
+
+            .hero-content p {
+                font-size: clamp(1rem, 2.5vw, 1.2rem);
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+
+            .about, .services {
+                padding: 60px 15px;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">Healthcity Hospital</a>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="service.html">Services</a>
+            <a href="appointment.html">Appointments</a>
+            <a href="emergency.html">Emergency</a>
+            <a href="doctors.html">Our Doctors</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our Hospital</h1>
+            <p>Providing world-class healthcare services with compassion and excellence. Your health is our priority.</p>
+            <a href="appointment.html" class="btn">Book Appointment</a>
+        </div>
+    </section>
+
+    <section class="about">
+        <h2>About Our Hospital</h2>
+        <p>We are committed to providing the highest quality healthcare services to our community. With state-of-the-art facilities and experienced medical professionals, we ensure that every patient receives personalized care and attention.</p>
+    </section>
+
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="card scroll-animate">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Cardiology</h3>
+                <p>Comprehensive cardiac care with advanced diagnostic and treatment facilities.</p>
+            </div>
+            <div class="card scroll-animate">
+                <i class="fas fa-brain"></i>
+                <h3>Neurology</h3>
+                <p>Expert neurological care for complex brain and nervous system disorders.</p>
+            </div>
+            <div class="card scroll-animate">
+                <i class="fas fa-bone"></i>
+                <h3>Orthopedics</h3>
+                <p>Specialized treatment for bone and joint problems with modern surgical techniques.</p>
+            </div>
+            <div class="card scroll-animate">
+                <i class="fas fa-baby"></i>
+                <h3>Pediatrics</h3>
+                <p>Compassionate care for children with specialized pediatric medical services.</p>
+            </div>
+            <div class="card scroll-animate">
+                <i class="fas fa-eye"></i>
+                <h3>Ophthalmology</h3>
+                <p>Advanced eye care services with cutting-edge diagnostic and surgical procedures.</p>
+            </div>
+            <div class="card scroll-animate">
+                <i class="fas fa-tooth"></i>
+                <h3>Dental Care</h3>
+                <p>Complete dental health services with modern equipment and experienced dentists.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>  Hospital Management System. </p>
+        <p>Emergency Contact: 911 | Phone: (555) 123-4567</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-links ul');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
